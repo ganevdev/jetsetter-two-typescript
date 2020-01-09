@@ -1,15 +1,45 @@
-import './marx.css';
-import './index.css';
+// import './index.css';
 
-import React from 'react';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+
+// import Application from './components/Application';
+
+// ReactDOM.render(<Application />, document.getElementById('root'));
+
+import { observer } from 'mobx-react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
+@observer
+class TodoListView extends Component {
+  render() {
+    return (
+      <div>
+        <ul>
+          {this.props.todoList.todos.map((todo) => (
+            <TodoView todo={todo} key={todo.id} />
+          ))}
+        </ul>
+        Tasks left: {this.props.todoList.unfinishedTodoCount}
+      </div>
+    );
+  }
+}
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const TodoView = observer(({ todo }) => (
+  <li>
+    <input
+      type="checkbox"
+      checked={todo.finished}
+      onClick={() => (todo.finished = !todo.finished)}
+    />
+    {todo.title}
+  </li>
+));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const store = new TodoList();
+ReactDOM.render(
+  <TodoListView todoList={store} />,
+  document.getElementById('mount')
+);
