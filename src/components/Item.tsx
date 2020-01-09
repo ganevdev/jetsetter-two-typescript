@@ -1,6 +1,12 @@
 import React from 'react';
 
-const Item = ({ item }) => {
+export interface IItem {
+  id: string;
+  packed: boolean;
+  value: string;
+}
+
+const Item = ({ item }: { item: IItem }) => {
   return (
     <article className="Item">
       <label htmlFor={item.id}>

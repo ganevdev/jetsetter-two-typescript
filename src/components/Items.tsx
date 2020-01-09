@@ -1,9 +1,9 @@
 import React from 'react';
 
 import Filter from './Filter';
-import Item from './Item';
+import Item, { IItem } from './Item';
 
-const Items = ({ title, items }) => {
+const Items = ({ title, items }: { title: string; items: IItem[] }) => {
   return (
     <section className="Items">
       <h2>

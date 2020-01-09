@@ -1,45 +1,16 @@
-// import './index.css';
+import './index.css';
 
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-
-// import Application from './components/Application';
-
-// ReactDOM.render(<Application />, document.getElementById('root'));
-
-import { observer } from 'mobx-react';
-import React, { Component } from 'react';
+import { Provider } from 'mobx-react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
-@observer
-class TodoListView extends Component {
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.props.todoList.todos.map((todo) => (
-            <TodoView todo={todo} key={todo.id} />
-          ))}
-        </ul>
-        Tasks left: {this.props.todoList.unfinishedTodoCount}
-      </div>
-    );
-  }
-}
+import Application from './components/Application';
+import ItemList from './store/ItemStore';
+const itemList = new ItemList();
 
-const TodoView = observer(({ todo }) => (
-  <li>
-    <input
-      type="checkbox"
-      checked={todo.finished}
-      onClick={() => (todo.finished = !todo.finished)}
-    />
-    {todo.title}
-  </li>
-));
-
-const store = new TodoList();
 ReactDOM.render(
-  <TodoListView todoList={store} />,
-  document.getElementById('mount')
+  <Provider itemList={itemList}>
+    <Application />
+  </Provider>,
+  document.getElementById('root')
 );

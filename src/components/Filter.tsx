@@ -1,6 +1,12 @@
 import React, { useCallback } from 'react';
 
-const Filter = ({ searchTerm, onChange }) => {
+const Filter = ({
+  searchTerm,
+  onChange,
+}: {
+  searchTerm: string;
+  onChange: Function;
+}) => {
   const handleChange = useCallback(
     (event) => {
       const value = event.target.value;

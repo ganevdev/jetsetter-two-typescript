@@ -3,3 +3,5 @@
 More about templates: https://create-react-app.dev/docs/custom-templates
 
 Repo: https://github.com/ganevru/cra-template-ganevru-ts
+
+Based on https://github.com/stevekinney/jetsetter-two
